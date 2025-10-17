@@ -1,0 +1,538 @@
+<!-- simpan sebagai keren.html -->
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Landing Page — Keren Banget</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #0f172a;
+      --accent-1: #7c5cff;
+      --accent-2: #50e3c2;
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.03);
+      --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      --radius: 14px;
+      --max-width: 1100px;
+      --ease: cubic-bezier(.2,.9,.3,1);
+      color-scheme: dark;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1000px 600px at 10% 10%, rgba(124,92,255,0.12), transparent 8%),
+                  radial-gradient(700px 400px at 90% 80%, rgba(80,227,194,0.06), transparent 8%),
+                  linear-gradient(180deg, var(--bg-1) 0%, #071025 100%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* container */
+    .wrap{
+      max-width: var(--max-width);
+      margin:0 auto;
+      padding:28px;
+    }
+
+    /* navbar */
+    header{
+      position:fixed;
+      top:16px;
+      left:0;right:0;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px 14px;
+      border-radius:12px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:44px;height:44px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      border-radius:10px;
+      box-shadow: 0 6px 20px rgba(80,50,200,0.24);
+      font-weight:800;
+      font-size:18px;
+      color:white;
+    }
+    .brand h1{font-size:16px;margin:0}
+    nav ul{
+      display:flex;
+      gap:14px;
+      list-style:none;
+      margin:0;padding:0;
+      align-items:center;
+    }
+    nav a{
+      color:inherit;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:14px;
+      opacity:0.9;
+      transition:all .25s var(--ease);
+    }
+    nav a:hover{transform:translateY(-3px); opacity:1}
+
+    /* hero */
+    .hero{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns: 1fr;
+      align-items:center;
+      padding-top:88px;
+      padding-bottom:80px;
+      gap:26px;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:32px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-block;
+      background:linear-gradient(90deg, rgba(124,92,255,0.12), rgba(80,227,194,0.06));
+      color:var(--accent-2);
+      padding:6px 10px;border-radius:999px;
+      font-weight:600;font-size:12px;
+      margin-bottom:12px;
+      width:max-content;
+      backdrop-filter: blur(6px);
+    }
+    .title{
+      font-size:46px;
+      line-height:1.03;
+      margin:0 0 10px 0;
+      letter-spacing:-0.02em;
+      font-weight:800;
+      background: linear-gradient(90deg,#fff 0%, rgba(255,255,255,0.6) 70%);
+      -webkit-background-clip: text;
+      background-clip:text;
+      color:transparent;
+      text-shadow: 0 6px 30px rgba(10,14,30,0.6);
+    }
+    .lead{
+      color: #c6d6e8;
+      font-size:16px;
+      margin-bottom:20px;
+      max-width:60ch;
+    }
+    .cta{
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 18px;border-radius:12px;font-weight:700;
+      text-decoration:none;border:0;cursor:pointer;
+      transition:transform .18s var(--ease), box-shadow .18s var(--ease);
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color: #021019;
+      box-shadow: 0 8px 30px rgba(80,50,200,0.24);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color: #dbeeff;
+    }
+    .btn:hover{transform:translateY(-4px)}
+
+    /* right card */
+    .feature-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--card-shadow);
+      border:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+    .stats{
+      display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;
+    }
+    .stat{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px;border-radius:10px;min-width:120px;
+    }
+    .stat h3{margin:0;font-size:18px}
+    .stat p{margin:6px 0 0 0;color:#bcd4ea;font-size:13px}
+
+    /* sections */
+    section{
+      margin-top:44px;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    .card{
+      border-radius:12px;padding:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 8px 24px rgba(3,8,20,0.5);
+      border:1px solid rgba(255,255,255,0.03);
+      transition:transform .2s var(--ease);
+    }
+    .card:hover{transform:translateY(-8px) scale(1.01)}
+
+    /* gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .gallery img{
+      width:100%;height:120px;object-fit:cover;border-radius:10px;cursor:pointer;
+      display:block;border:3px solid transparent;transition:transform .18s, box-shadow .18s;
+    }
+    .gallery img:hover{transform:scale(1.03); box-shadow: 0 10px 30px rgba(2,6,23,0.6)}
+
+    /* modal */
+    .modal{
+      position:fixed;inset:0;display:none;place-items:center;background:rgba(2,6,23,0.6);z-index:80;
+    }
+    .modal.open{display:grid}
+    .modal img{max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+
+    /* footer */
+    footer{
+      margin-top:42px;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: var(--card-shadow);
+    }
+
+    /* waves */
+    .waves{
+      position:relative;height:100px;margin-top:18px;overflow:hidden;
+    }
+    .waves svg{display:block;width:100%}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero-inner{grid-template-columns:1fr}
+      .feature-card{order:2}
+      .wrap{padding:18px}
+      header{top:12px}
+    }
+    @media (max-width:600px){
+      .title{font-size:32px}
+      .nav ul{display:none}
+      .hamburger{display:inline-flex}
+    }
+
+    /* hamburger */
+    .hamburger{
+      display:none;
+      width:46px;height:46px;border-radius:10px;background:var(--glass);
+      align-items:center;justify-content:center;cursor:pointer;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .mobile-menu{
+      position:fixed;right:18px;top:76px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:12px;box-shadow:var(--card-shadow);display:none;z-index:70;
+    }
+    .mobile-menu.open{display:block}
+    .mobile-menu a{display:block;padding:10px 12px;border-radius:8px}
+
+    /* subtle entrance animation */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease), transform .7s var(--ease)}
+    .reveal.show{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav" role="navigation" aria-label="Main navigation">
+        <a class="brand" href="#">
+          <div class="logo">KB</div>
+          <div>
+            <h1 style="margin:0">Keren Banget</h1>
+            <div style="font-size:11px;color:#9fb7d9;margin-top:4px">Modern · Responsive · Animasi</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#features">Fitur</a></li>
+            <li><a href="#gallery">Galeri</a></li>
+            <li><a href="#contact">Kontak</a></li>
+          </ul>
+        </nav>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn btn-primary" onclick="scrollToSection('#contact')">Ayo Mulai</button>
+          <button class="hamburger" aria-label="Menu" id="hamburger">
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="20" height="2" rx="1" fill="white" opacity="0.9"></rect>
+              <rect y="6" width="20" height="2" rx="1" fill="white" opacity="0.8"></rect>
+              <rect y="12" width="20" height="2" rx="1" fill="white" opacity="0.7"></rect>
+            </svg>
+          </button>
+        </div>
+
+        <!-- mobile menu -->
+        <div class="mobile-menu" id="mobileMenu" role="menu">
+          <a href="#home" onclick="toggleMobileMenu()">Beranda</a>
+          <a href="#features" onclick="toggleMobileMenu()">Fitur</a>
+          <a href="#gallery" onclick="toggleMobileMenu()">Galeri</a>
+          <a href="#contact" onclick="toggleMobileMenu()">Kontak</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow reveal" style="transition-delay:.05s">Templat Gratis • Siap Pakai</span>
+        <h2 class="title reveal" style="transition-delay:.12s">Buat Halaman Web yang <span style="color:transparent;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text">Keren Banget</span> dalam Hitungan Menit</h2>
+        <p class="lead reveal" style="transition-delay:.22s">
+          Halaman ini menampilkan desain modern: background gradasi, efek glass, animasi halus, dan komponen yang mudah kamu modifikasi. Cocok untuk landing page, portfolio, atau presentasi project.
+        </p>
+
+        <div class="cta reveal" style="transition-delay:.32s">
+          <button class="btn btn-primary" onclick="scrollToSection('#features')">
+            Mulai Sekarang
+            <svg width="16" height="16" viewBox="0 0 24 24" style="margin-left:4px"><path fill="currentColor" d="M12 2l10 10-10 10L2 12 12 2z"></path></svg>
+          </button>
+          <a class="btn btn-ghost" href="#gallery">Lihat Galeri</a>
+        </div>
+
+        <div class="cards reveal" style="transition-delay:.42s">
+          <div class="card">
+            <strong>Responsif</strong>
+            <p style="margin:8px 0 0 0;color:#bcd4ea;font-size:13px">Tampilan optimal di HP, tablet, dan desktop.</p>
+          </div>
+          <div class="card">
+            <strong>Mudah dikustom</strong>
+            <p style="margin:8px 0 0 0;color:#bcd4ea;font-size:13px">Variabel warna dan ukuran di CSS: gampang ganti tema.</p>
+          </div>
+          <div class="card">
+            <strong>Interaktif</strong>
+            <p style="margin:8px 0 0 0;color:#bcd4ea;font-size:13px">Galeri zoom, smooth scroll, dan menu mobile.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="feature-card reveal" style="transition-delay:.52s">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h3 style="margin:0">Statistik Cepat</h3>
+            <p style="margin:6px 0 0 0;color:#9fb7d9;font-size:13px">Angka dan metrik contoh untuk mockup.</p>
+          </div>
+          <div style="font-size:22px;font-weight:800">🚀</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>1.2K</h3>
+            <p>Pengguna aktif</p>
+          </div>
+          <div class="stat">
+            <h3>98%</h3>
+            <p>Responsif</p>
+          </div>
+          <div class="stat">
+            <h3>24/7</h3>
+            <p>Support UI</p>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <small style="color:#9fb7d9">Tips: ubah <code>--accent-1</code> dan <code>--accent-2</code> di :root untuk tema warna.</small>
+        </div>
+
+        <div class="waves" aria-hidden="true">
+          <!-- decorative wave -->
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0 C150,100 350,100 600,50 C850,0 1050,100 1200,50 L1200,120 L0,120 Z" fill="url(#g1)" opacity="0.9"></path>
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#7c5cff"/>
+                <stop offset="1" stop-color="#50e3c2"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </aside>
+    </div>
+
+    <!-- features -->
+    <div class="wrap" id="features">
+      <section>
+        <h2 style="margin:0">Fitur Unggulan</h2>
+        <p style="color:#9fb7d9;margin-top:8px">Beberapa komponen yang bisa kamu pakai ulang.</p>
+
+        <div class="cards reveal" style="transition-delay:.18s">
+          <div class="card">
+            <h3>Hero full-screen</h3>
+            <p style="margin-top:8px;color:#bcd4ea">Teks besar, CTA jelas, dan background gradasi.</p>
+          </div>
+          <div class="card">
+            <h3>Glass cards</h3>
+            <p style="margin-top:8px;color:#bcd4ea">Kartu dengan efek blur & transparansi.</p>
+          </div>
+          <div class="card">
+            <h3>Galeri interaktif</h3>
+            <p style="margin-top:8px;color:#bcd4ea">Klik untuk memperbesar — cocok untuk portfolio</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- gallery -->
+      <section id="gallery">
+        <h2 style="margin-top:20px">Galeri</h2>
+        <p style="color:#9fb7d9;margin-top:8px">Klik gambar untuk memperbesar.</p>
+
+        <div class="gallery reveal" style="transition-delay:.26s" id="galleryGrid">
+          <!-- contoh gambar: menggunakan picsum.photos (bisa diganti) -->
+          <img src="https://picsum.photos/id/1015/600/400" alt="galeri 1">
+          <img src="https://picsum.photos/id/1021/600/400" alt="galeri 2">
+          <img src="https://picsum.photos/id/1025/600/400" alt="galeri 3">
+          <img src="https://picsum.photos/id/1035/600/400" alt="galeri 4">
+          <img src="https://picsum.photos/id/1041/600/400" alt="galeri 5">
+          <img src="https://picsum.photos/id/1050/600/400" alt="galeri 6">
+        </div>
+      </section>
+
+      <!-- contact -->
+      <section id="contact">
+        <h2 style="margin-top:20px">Kontak</h2>
+        <p style="color:#9fb7d9;margin-top:8px">Form kontak mockup — tidak mengirim data (demo).</p>
+
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px">
+          <form class="card reveal" style="padding:18px" onsubmit="event.preventDefault(); toast('Pesan terkirim — demo')">
+            <label style="display:block;margin-bottom:8px;font-weight:600">Nama</label>
+            <input required style="width:100%;padding:10px;border-radius:8px;border:0;background:var(--glass-2);color:inherit" placeholder="Nama kamu">
+
+            <label style="display:block;margin:12px 0 8px 0;font-weight:600">Email</label>
+            <input required type="email" style="width:100%;padding:10px;border-radius:8px;border:0;background:var(--glass-2);color:inherit" placeholder="email@contoh.com">
+
+            <label style="display:block;margin:12px 0 8px 0;font-weight:600">Pesan</label>
+            <textarea required style="width:100%;min-height:110px;padding:10px;border-radius:8px;border:0;background:var(--glass-2);color:inherit" placeholder="Tulis pesan..."></textarea>
+
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+              <button class="btn btn-ghost" type="reset">Bersihkan</button>
+              <button class="btn btn-primary" type="submit">Kirim</button>
+            </div>
+          </form>
+
+          <aside class="card reveal" style="padding:18px">
+            <h3 style="margin-top:0">Info</h3>
+            <p style="color:#bcd4ea">Alamat demo: Jalan Imajinasi No.1</p>
+            <p style="color:#bcd4ea">Email: halo@kerenbgt.example</p>
+            <div style="margin-top:12px">
+              <strong>Follow</strong>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <div class="btn btn-ghost" style="padding:8px 10px">Twitter</div>
+                <div class="btn btn-ghost" style="padding:8px 10px">Instagram</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <footer class="reveal" style="margin-top:22px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div>
+            <strong>Keren Banget</strong>
+            <div style="color:#9fb7d9;font-size:13px">Made with ♥ — edit sesukamu</div>
+          </div>
+          <div style="color:#9fb7d9;font-size:13px">© <span id="year"></span> Semua hak cipta.</div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- modal untuk gambar -->
+  <div class="modal" id="modal">
+    <img src="" alt="Preview" id="modalImg">
+  </div>
+
+  <script>
+    // small helpers
+    function $(s){return document.querySelector(s)}
+    function $all(s){return [...document.querySelectorAll(s)]}
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear()
+
+    // reveal on load
+    window.addEventListener('load', ()=> {
+      setTimeout(()=> document.querySelectorAll('.reveal').forEach((el,i)=> setTimeout(()=> el.classList.add('show'), i*80)), 80)
+    })
+
+    // smooth scroll
+    function scrollToSection(sel){
+      const el = document.querySelector(sel)
+      if(!el) return
+      el.scrollIntoView({behavior:'smooth', block:'start'})
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href')
+        if(!href || href === '#') return
+        const target = document.querySelector(href)
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}) }
+      })
+    })
+
+    // gallery modal
+    const modal = $('#modal'), modalImg = $('#modalImg')
+    $all('.gallery img').forEach(img=>{
+      img.addEventListener('click', e=>{
+        modalImg.src = e.currentTarget.src
+        modal.classList.add('open')
+      })
+    })
+    modal.addEventListener('click', ()=> modal.classList.remove('open'))
+
+    // hamburger mobile menu
+    const hamburger = $('#hamburger'), mobileMenu = $('#mobileMenu')
+    function toggleMobileMenu(){ mobileMenu.classList.toggle('open') }
+    hamburger.addEventListener('click', toggleMobileMenu)
+
+    // small toast (non intrusive)
+    function toast(text){
+      const t = document.createElement('div')
+      t.textContent = text
+      Object.assign(t.style,{position:'fixed',right:'18px',bottom:'18px',padding:'12px 16px',borderRadius:'10px',background:'linear-gradient(90deg,var(--accent-1),var(--accent-2))',color:'#021019',fontWeight:700,boxShadow:'0 10px 30px rgba(2,6,23,0.5)',zIndex:999})
+      document.body.appendChild(t)
+      setTimeout(()=> t.style.opacity=0,2200)
+      setTimeout(()=> t.remove(),2600)
+    }
+
+    // keyboard: Esc closes modal & mobile menu
+    document.addEventListener('keydown', e=>{
+      if(e.key === 'Escape'){ modal.classList.remove('open'); mobileMenu.classList.remove('open') }
+    })
+  </script>
+</body>
+</html>
